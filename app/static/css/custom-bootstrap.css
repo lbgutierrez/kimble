@@ -1,0 +1,11 @@
+/*navbar*/
+.navbar { margin-bottom: 2rem; padding: 0.5rem 2rem; box-shadow: 0px 0px 5px tomato; }
+
+/*forms*/
+.form-control { margin-bottom: 1rem; }
+.form-control:focus { border-color: tomato; box-shadow: none;}
+.form-check-input:focus { border-color: tomato; box-shadow: none; }
+
+/*buttons*/
+.btn-tomato { color: #fff; background-color: tomato; border-color: tomato; }
+.btn-tomato:hover { color: #fff; background-color: #FF7962; border-color: "#FF7962"; }
