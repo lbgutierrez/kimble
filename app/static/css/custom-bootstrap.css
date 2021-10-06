@@ -1,5 +1,7 @@
 /*navbar*/
 .navbar { margin-bottom: 2rem; padding: 0.5rem 2rem; box-shadow: 0px 0px 5px tomato; }
+.nav-item.active .nav-link { color: tomato; }
+.nav-item.active .nav-link:hover { color: #e25137; }
 
 /*forms*/
 .form-control { margin-bottom: 1rem; }

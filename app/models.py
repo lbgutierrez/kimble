@@ -56,19 +56,23 @@ class User( UserMixin, db.Model ):
 
         return True
 
-class Categoria( db.Model ):
-    __tablename__ = "fntk_categoria"
-    id = db.Column( db.Integer, primary_key=True )
-    nombre = db.Column( db.String )
-    created_date = db.Column( db.DateTime, default=datetime.datetime.now )
-    created_by = db.Column( db.Integer, db.ForeignKey( "auth_users.id" ) )
-
-class Subcategoria( db.Model ):
-    __tablename__ = "fntk_subcategoria"
+class Category( db.Model ):
+    __tablename__ = "fntk_category"
     id = db.Column( db.Integer, primary_key=True )
     nombre = db.Column( db.String )
     descripcion = db.Column( db.String )
-    created_by = db.Column( db.Integer, db.ForeignKey( "fntk_categoria.id" ) )
+    subcategorys = db.relationship("Subcategory", back_populates="category")
+    created_date = db.Column( db.DateTime, default=datetime.datetime.now )
+    created_by = db.Column( db.Integer, db.ForeignKey( "auth_users.id" ) )
+
+
+class Subcategory( db.Model ):
+    __tablename__ = "fntk_subcategory"
+    id = db.Column( db.Integer, primary_key=True )
+    nombre = db.Column( db.String )
+    descripcion = db.Column( db.String )
+    category = db.relationship("Category", back_populates="subcategorys")
+    category_id = db.Column( db.Integer, db.ForeignKey( "fntk_category.id" ) )
     created_date = db.Column( db.DateTime, default=datetime.datetime.now )
     created_by = db.Column( db.Integer, db.ForeignKey( "auth_users.id" ) )
 
@@ -77,12 +81,17 @@ class Subcategoria( db.Model ):
 def load_user( user_id ):
     return User.query.get( int( user_id ) )
 
-def gen_default_users():
-    user = User()
-    user.user_name = "admin"
-    user.email = "admin@kimble.org"
-    user.confirmed = True
-    user.password = "admin"
-    user.created_by = None
-    db.session.add( user )
-    db.session.commit()
+class Setup():
+    
+    def install( self ):
+        self.gen_default_users()
+
+    def gen_default_users( self ):
+        user = User()
+        user.user_name = "admin"
+        user.email = "admin@kimble.org"
+        user.confirmed = True
+        user.password = "admin"
+        user.created_by = None
+        db.session.add( user )
+        db.session.commit()

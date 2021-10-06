@@ -1,4 +1,6 @@
-body { background-color: #fdfd80; font-size: 1.1rem; }
+body { background-color: #fdfd80; font-size: 1.1rem; color: tomato; }
+
+h1 { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: 2rem;}
 
 .brand { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: tomato; text-decoration: none; padding: 0rem 0.5rem; }
 .brand:hover { color: tomato; }

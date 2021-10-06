@@ -10,19 +10,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       
       <ul class="navbar-nav">
-        <li class="nav-item{%if menusel == 'Home'%} active{%endif%}">
-          <a class="nav-link" href="{{ nav_home }}">
-            Inicio{%if menusel == 'Home'%} <span class="sr-only">(current)</span>{%endif%}
+        <li class="nav-item{%if ctx.activemenu == 'web'%} active{%endif%}">
+          <a class="nav-link" href="{{ url_for( 'web.index' ) }}">
+            Inicio{%if ctx.activemenu == 'web'%} <span class="sr-only">(current)</span>{%endif%}
           </a>
         </li>
-        <li class="nav-item{%if menusel == 'Documentation'%} active{%endif%}">
+        <li class="nav-item{%if ctx.activemenu == 'Documentation'%} active{%endif%}">
             <a class="nav-link" href="{{ nav_documentation }}">
-              Documentación{%if menusel == 'Documentation'%} <span class="sr-only">(current)</span>{%endif%}
+              Documentación{%if ctx.activemenu == 'Documentation'%} <span class="sr-only">(current)</span>{%endif%}
             </a>
         </li>
-        <li class="nav-item{%if menusel == 'Admin'%} active{%endif%}">
-            <a class="nav-link" href="{{ nav_admin }}">
-              Administrar{%if menusel == 'Admin'%} <span class="sr-only">(current)</span>{%endif%}
+        <li class="nav-item{%if ctx.activemenu == 'admin'%} active{%endif%}">
+            <a class="nav-link" href="{{ url_for( 'admin.index' ) }}">
+              Administrar{%if ctx.activemenu == 'admin'%} <span class="sr-only">(current)</span>{%endif%}
             </a>
         </li>
       </ul>
