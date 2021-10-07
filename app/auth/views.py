@@ -25,7 +25,7 @@ def auth_login():
 
         service = UserService()
         user = service.find_user_account( account )
-        print("USER" + user.user_name)
+
         if user is not None and user.verify_password( password ):
             print("OK")
             login_user( user, form.remember_me.data )
