@@ -59,8 +59,8 @@ class User( UserMixin, db.Model ):
 class Category( db.Model ):
     __tablename__ = "fntk_category"
     id = db.Column( db.Integer, primary_key=True )
-    nombre = db.Column( db.String )
-    descripcion = db.Column( db.String )
+    name = db.Column( db.String )
+    description = db.Column( db.String )
     subcategorys = db.relationship("Subcategory", back_populates="category")
     created_date = db.Column( db.DateTime, default=datetime.datetime.now )
     created_by = db.Column( db.Integer, db.ForeignKey( "auth_users.id" ) )
@@ -69,8 +69,8 @@ class Category( db.Model ):
 class Subcategory( db.Model ):
     __tablename__ = "fntk_subcategory"
     id = db.Column( db.Integer, primary_key=True )
-    nombre = db.Column( db.String )
-    descripcion = db.Column( db.String )
+    name = db.Column( db.String )
+    description = db.Column( db.String )
     category = db.relationship("Category", back_populates="subcategorys")
     category_id = db.Column( db.Integer, db.ForeignKey( "fntk_category.id" ) )
     created_date = db.Column( db.DateTime, default=datetime.datetime.now )
@@ -82,7 +82,7 @@ def load_user( user_id ):
     return User.query.get( int( user_id ) )
 
 class Setup():
-    
+
     def install( self ):
         self.gen_default_users()
 

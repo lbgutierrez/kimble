@@ -1,7 +1,14 @@
-
+from app import db
 from app.models import Category, Subcategory
 
 class CategoryService():
+
+    def save( self, name, description ):
+        category = Category()
+        category.name = name
+        category.description = description
+        db.session.add( category )
+        db.session.commit()
 
     def find_all( self ):
         return Category.query.all()

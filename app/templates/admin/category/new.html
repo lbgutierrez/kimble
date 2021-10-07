@@ -1,0 +1,48 @@
+{% extends "admin/layout/_custom_base.html" %}
+{% block content %}
+
+<form id="new_category" action="{{ url_for( 'admin.new_category' ) }}" method="POST">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>NUEVA CATEGORIA_</h1>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="box">
+                
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        {{ form.name.label }}
+                        <div class="col">
+                            {{ form.name( class="form-control" ) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.description.label }}
+                        <div class="col">
+                            {{ form.description( class="form-control" ) }}
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <div class="col-3">
+            <a href="{{ url_for( ctx.backward ) }}" class="btn btn-tomato foreward w-100">VOLVER</a>
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+            <input type="submit" value="CREAR" class="btn btn-tomato w-100">
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

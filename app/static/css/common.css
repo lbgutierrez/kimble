@@ -2,10 +2,18 @@ body { background-color: #fdfd80; font-size: 1.1rem; color: tomato; }
 
 h1 { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: 2rem;}
 
+table { border: 2px solid tomato; border-radius:  15px 15px; }
+th { background-color: tomato; color: #FFF; }
+td { background-color: #FFF; padding: 0.5rem;}
+
 .brand { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: tomato; text-decoration: none; padding: 0rem 0.5rem; }
 .brand:hover { color: tomato; }
 .brand.sm { font-size: 1.5rem; }
 .brand.md { font-size: 2rem; }
 .brand.lg { font-size: 3rem;  }
+
+.link-item { color: tomato; text-decoration: none; font-weight: 510; }
+.link-item:hover { color: tomato;   }
+.link-item .box:hover { background-color: #ffffffcc; }
 
 .box { background-color: white; border-radius: 15px 15px; box-shadow: 0px 0px 5px tomato; padding: 2rem}

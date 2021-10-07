@@ -9,5 +9,7 @@
 .form-check-input:focus { border-color: tomato; box-shadow: none; }
 
 /*buttons*/
-.btn-tomato { color: #fff; background-color: tomato; border-color: tomato; }
+.btn-tomato { color: #fff; background-color: tomato; border-color: tomato; font-weight: 530; }
 .btn-tomato:hover { color: #fff; background-color: #FF7962; border-color: "#FF7962"; }
+.btn-tomato.foreward { background-color: transparent; color:tomato; border: 2px solid tomato; }
+.btn-tomato.foreward:hover { background-color: tomato; color:#fff; border: 2px solid tomato; }

@@ -10,34 +10,40 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
-        <div class="box">
-            
-            <div class="text-center">
-                <i class="fas fa-archive fa-5x mb-3"></i>
-                <p>CATEGORIAS Y SUBCATEGORIAS</p>
+
+        <a href="{{ url_for('admin.category') }}" class="link-item">
+            <div class="box">
+                <div class="text-center">
+                    <i class="fas fa-archive fa-5x mb-3"></i>
+                    <p>CATEGORIAS</p>
+                </div>
             </div>
-           
-        </div>
+        </a>
+
     </div>
     <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
-        <div class="box">
-            
-            <div class="text-center">
-                <i class="fas fa-code fa-5x mb-3"></i>
-                <p>COMPONENTES</p>
-            </div>  
 
-        </div>
+        <a href="" class="link-item">
+            <div class="box">
+                <div class="text-center">
+                    <i class="fas fa-code fa-5x mb-3"></i>
+                    <p>COMPONENTES</p>
+                </div>  
+            </div>
+        </a>
+
     </div>
     <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
-        <div class="box">
-            
-            <div class="text-center">
-                <i class="fas fa-file-code fa-5x mb-3"></i>
-                <p>SITIOS Y PAGINAS</p>
-            </div>  
 
-        </div>
+        <a href="" class="link-item">
+            <div class="box">
+                <div class="text-center">
+                    <i class="fas fa-file-code fa-5x mb-3"></i>
+                    <p>SITIOS Y PAGINAS</p>
+                </div>  
+            </div>
+        </a>
+
     </div>
 </div>
 {% endblock %}

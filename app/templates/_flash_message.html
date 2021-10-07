@@ -1,0 +1,25 @@
+
+ {% with messages = get_flashed_messages( with_categories=true ) %}
+    {% if messages %}
+    
+ <div class="row mb-2">
+    <div class="col">
+        {% for category, message in messages %}
+            {% if category == 'danger' %}
+                {% set class_message = 'alert alert-danger alert-dismissible fade show' %}
+            {% elif category == 'warning' %}
+                {% set class_message = 'alert alert-warning alert-dismissible fade show' %}
+            {% else %}
+                {% set class_message = 'alert alert-success alert-dismissible fade show' %}
+            {% endif %}
+            <div class="{{class_message}}" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+           
+        {% endfor %}
+    </div>
+</div>
+    {% endif %}
+{% endwith %}
+    

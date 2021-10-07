@@ -3,18 +3,54 @@
 
 <div class="row">
     <div class="col-12">
-        <h1>Categorias</h1>
+        <h1>CATEGORIAS_</h1>
     </div>
 </div>
 
-<div class="row">
+<div class="row mb-3">
     <div class="col-12">
-        <div class="box">
-            
-            <div class="">
-                Bienvenido a kimble, un portal donde podr&aacute;s documentar las bibliotecas de componentes visuales para tu sitio web.
-            </div>  
-
-        </div>
+        <a href="{{ url_for('admin.new_category') }}" class="btn btn-tomato">NUEVO</a>
     </div>
 </div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <table class="w-100">
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>DESCRIPCION</th>
+                    <th>ACCION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data.categorys %}
+                {% for cat in data.categorys %}
+
+                    <tr>
+                        <td>{{ cat.name }}</td>
+                        <td>{{ cat.description }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No se encontraron categorias a mostrar</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>    
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-3">
+        <a href="{{ url_for( ctx.backward ) }}" class="btn btn-tomato foreward w-100">VOLVER</a>
+    </div>
+    <div class="col-9">
+    </div>
+</div>
+
+
+
+{% endblock %}
