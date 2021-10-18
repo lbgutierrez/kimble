@@ -1,11 +1,11 @@
 {% extends "admin/layout/_custom_base.html" %}
 {% block content %}
 
-<form id="new_category" action="{{ url_for( 'admin.new_category' ) }}" method="POST">
+<form id="new_category" action="{{ url_for( 'admin.new_subcategory', cat_alias=data.cat_alias ) }}" method="POST">
 
     <div class="row">
         <div class="col-12">
-            <h1>NUEVA CATEGORIA_</h1>
+            <h1>NUEVA SUBCATEGORIA_</h1>
         </div>
     </div>
 
@@ -60,9 +60,6 @@
         </div>
         <div class="col"></div>
     </div>
-
-
-    
 
 </form>
 

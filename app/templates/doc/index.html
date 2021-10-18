@@ -1,0 +1,27 @@
+{% extends "doc/layout/_custom_base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <h1>DOCUMENTACION_</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        {% if data.categorys %}
+        {% for cat in data.categorys %}
+        <div>
+            <span class="menu-title">{{ cat.name }}</span>
+            <ul>
+                {% for scat in cat.subcategorys %}
+                <li>{{ scat.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="col-md-8"></div>
+</div>
+{% endblock %}

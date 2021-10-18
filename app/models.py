@@ -60,7 +60,8 @@ class Category( db.Model ):
     __tablename__ = "fntk_category"
     id = db.Column( db.Integer, primary_key=True )
     name = db.Column( db.String )
-    description = db.Column( db.String )
+    alias = db.Column( db.String, unique=True, index=True )
+    description = db.Column( db.String(250) )
     subcategorys = db.relationship("Subcategory", back_populates="category")
     created_date = db.Column( db.DateTime, default=datetime.datetime.now )
     created_by = db.Column( db.Integer, db.ForeignKey( "auth_users.id" ) )
@@ -70,7 +71,8 @@ class Subcategory( db.Model ):
     __tablename__ = "fntk_subcategory"
     id = db.Column( db.Integer, primary_key=True )
     name = db.Column( db.String )
-    description = db.Column( db.String )
+    alias = db.Column( db.String, unique=True, index=True )
+    description = db.Column( db.String(250) )
     category = db.relationship("Category", back_populates="subcategorys")
     category_id = db.Column( db.Integer, db.ForeignKey( "fntk_category.id" ) )
     created_date = db.Column( db.DateTime, default=datetime.datetime.now )

@@ -36,7 +36,7 @@ def auth_login():
 
             return redirect( next )
 
-        flash( "Invalid email or password" )
+        flash( "Usuario o contraseña inválida" )
 
     return render_template("auth/login.html", form=form)
 

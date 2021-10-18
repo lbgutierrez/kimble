@@ -1,0 +1,62 @@
+{% extends "admin/layout/_custom_base_menu.html" %}
+{% block content_page %}
+
+<div class="row">
+    <div class="col-12">
+        <h1>CATEGORIAS_</h1>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="{{ url_for('admin.new_category') }}" class="btn btn-tomato">NUEVO</a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <table class="w-100">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-4">NOMBRE</th>
+                    <th class="col-6">DESCRIPCION</th>
+                    <th class="col-2">ACCION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data.categorys %}
+                {% for cat in data.categorys %}
+
+                    <tr class="d-flex">
+                        <td class="col-4">{{ cat.name }}</td>
+                        <td class="col-6">{{ cat.description }}</td>
+                        <td class="col-2 action-btn">
+                            <a href="{{ url_for( 'admin.subcategory', cat_alias=cat.alias ) }}">
+                                <i class="fas fa-outdent ml-2 mr-2"></i>
+                            </a>
+                            <i class="fas fa-edit ml-2 mr-2"></i>
+                            <i class="fas fa-trash-alt ml-2 mr-2"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No se encontraron categorias a mostrar</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>    
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-3">
+        <a href="{{ ctx.backward }}" class="btn btn-tomato foreward w-100">VOLVER</a>
+    </div>
+    <div class="col-9">
+    </div>
+</div>
+
+
+
+{% endblock %}

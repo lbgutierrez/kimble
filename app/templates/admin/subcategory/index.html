@@ -1,0 +1,87 @@
+{% extends "admin/layout/_custom_base_menu.html" %}
+{% block content_page %}
+
+<div class="row">
+    <div class="col-12">
+        <h1>SUBCATEGORIAS_</h1>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-9">
+        {% if data.cat_alias != None %}
+        <a href="{{ url_for('admin.new_subcategory', cat_alias=data.cat_alias) }}" class="btn btn-tomato">NUEVO</a>
+        {% else %}
+        <button type="button" class="btn btn-tomato" disabled>NUEVO</button>
+        {% endif %}
+    </div>
+    <div class="col-3">
+        <div class="dropdown">
+            <button class="btn btn-tomato dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Selecciona categoría
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                {% if data.categorys %}
+                {% for cat in data.categorys %}
+                    <li><a class="dropdown-item" href="{{ url_for('admin.subcategory', cat_alias=cat.alias) }}">{{ cat.name }}</a></li>
+                {% endfor %}
+                {% else %}
+                    <li><a class="dropdown-item" href="#">No existen categorías</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <table class="w-100">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-4">NOMBRE</th>
+                    <th class="col-6">DESCRIPCION</th>
+                    <th class="col-2">ACCION</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% if data.subcategorys %}
+                {% for cat in data.subcategorys %}
+
+                    <tr class="d-flex">
+                        <td class="col-4">{{ cat.name }}</td>
+                        <td class="col-6">{{ cat.description }}</td>
+                        <td class="col-2 action-btn">
+                            <i class="fas fa-edit ml-2 mr-2"></i>
+                            <i class="fas fa-trash-alt ml-2 mr-2"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">
+                        {% if data.cat_alias != None %}
+                            No se encontraron subcategorias, pulsa el boton "nuevo"<br>
+                            para comenzar, sino presiona <a href="{{ url_for('admin.new_subcategory', cat_alias=data.cat_alias) }}" class="blue">aquí</a>.
+                        {% else %}
+                            Selecciona una categoría para empezar
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>    
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-3">
+        <a href="{{ ctx.backward }}" class="btn btn-tomato foreward w-100">VOLVER</a>
+    </div>
+    <div class="col-9">
+    </div>
+</div>
+
+
+
+{% endblock %}

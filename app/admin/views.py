@@ -1,6 +1,6 @@
 from . import admin
 from app.admin.forms import CategoryForm, SubcategoryForm
-from app.admin.service import CategoryService, SubCategoryService
+from app.admin.service import CategoryService, SubcategoryService
 from flask import flash, render_template, redirect, url_for
 from flask_login import login_required
 from app.utils.context import Context
@@ -10,7 +10,7 @@ from app.utils.context import Context
 @login_required
 def index():
     ctx = Context( "admin" )
-    ctx.setBackward( "web.index" )
+    ctx.setBackward( url_for( "web.index" ) )
 
     return render_template( "/admin/adm_index.html", ctx=ctx.generate() )
 
@@ -19,7 +19,7 @@ def index():
 @login_required
 def category():
     ctx = Context( "admin" )
-    ctx.setBackward( "admin.index" )
+    ctx.setBackward( url_for( "admin.index" ) )
 
     catservice = CategoryService()
     categorys = catservice.find_all()
@@ -28,23 +28,24 @@ def category():
         "categorys": categorys
     }
 
-    return render_template( "/admin/category/categorys.html", ctx=ctx.generate(), data=data )
+    return render_template( "/admin/category/index.html", ctx=ctx.generate(), data=data )
 
 
 @admin.route( "/category/new", methods=["GET", "POST"] )
 @login_required
 def new_category():
     ctx = Context( "admin" )
-    ctx.setBackward( "admin.category" )
+    ctx.setBackward( url_for( "admin.category" ) )
 
     form = CategoryForm()
     if form.validate_on_submit():
 
         name = form.name.data
+        alias = form.alias.data
         desc = form.description.data
 
         service = CategoryService()
-        service.save( name, desc )
+        service.save( name, alias, desc )
 
         flash( "Categoría creada satisfactoriamente" )
         return redirect( url_for( "admin.category" ) )
@@ -54,8 +55,52 @@ def new_category():
 def modificar_categoria():
     return "categorias"
 
-def subcategorias():
-    return "subcategorias"
 
-def nueva_subcategoria():
-    return "categorias"
+@admin.route( "/cat-defx/subcategory", methods=["GET"] )
+@admin.route( "/cat-<cat_alias>/subcategorys/", methods=["GET"] )
+@login_required
+def subcategory( cat_alias=None ):
+    ctx = Context( "admin" )
+    ctx.setBackward( url_for( "admin.index" ) )
+
+    catservice = CategoryService()
+    categorys = catservice.find_all()
+    
+    subcategorys = []
+    if cat_alias != None:
+        subcatservice = SubcategoryService()
+        subcategorys = subcatservice.find_by_category( cat_alias )
+
+    data = {
+        "cat_alias": cat_alias,
+        "categorys": categorys,
+        "subcategorys": subcategorys
+    }
+
+    return render_template( "/admin/subcategory/index.html", ctx=ctx.generate(), data=data )
+
+@admin.route( "/cat-<cat_alias>/subcategorys/new", methods=["GET", "POST"] )
+@login_required
+def new_subcategory( cat_alias ):
+    ctx = Context( "admin" )
+    ctx.setBackward( url_for( "admin.subcategory", cat_alias=cat_alias ) )
+
+    data = {
+        "cat_alias": cat_alias
+    }
+
+    form = SubcategoryForm()
+    if form.validate_on_submit():
+
+        name = form.name.data
+        alias = form.alias.data
+        desc = form.description.data
+
+        service = SubcategoryService()
+        service.save( name, alias, desc, cat_alias )
+
+        flash( "Subategoría creada satisfactoriamente" )
+        return redirect( url_for( "admin.subcategory", cat_alias=cat_alias ) )
+
+    return render_template( "/admin/subcategory/new.html", ctx=ctx.generate(), form=form, data=data)
+

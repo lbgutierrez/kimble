@@ -1,0 +1,39 @@
+{% extends "_base.html" %}
+{% block css_custom %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/spec/admin.css' ) }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="content-page col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9">
+        {% block content_page %}{% endblock %}
+    </div>
+    <div class="col-sm-5 col-md-5 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="menu box">
+            <div class="mb-3">
+                <h6>Categorias y Subcategorias</h6>
+                <ul>
+                    <li><a href="{{ url_for('admin.category') }}">Categorias</a></li>
+                    <li><a href="{{ url_for('admin.subcategory') }}">Subcategorias</a></li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <h6>Componentes</h6>
+                <ul>
+                    <li>Genéricos</li>
+                    <li>Personalizados</li>
+                </ul>
+            </div>
+            <div class="">
+                <h6>Sitios y Páginas</h6>
+                <ul>
+                    <li>Sitios</li>
+                    <li>Páginas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

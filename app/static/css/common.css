@@ -2,9 +2,21 @@ body { background-color: #fdfd80; font-size: 1.1rem; color: tomato; }
 
 h1 { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: 2rem;}
 
+a { color: tomato; text-decoration: none; }
+a:hover { color: #fd907c; text-decoration: none; }
+
+.blue { color: blue; }
+.blue:hover { color: #5c5cff; }
+
 table { border: 2px solid tomato; border-radius:  15px 15px; }
 th { background-color: tomato; color: #FFF; }
 td { background-color: #FFF; padding: 0.5rem;}
+
+.action-btn i { padding: 0rem 0.3rem; }
+
+.menu h6 { font-weight: 510; font-size: 1rem;}
+.menu ul { margin-bottom: 0; padding-left: 1.5rem; list-style-type: disc; }
+.menu li { font-size: 0.8rem; }
 
 .brand { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: tomato; text-decoration: none; padding: 0rem 0.5rem; }
 .brand:hover { color: tomato; }

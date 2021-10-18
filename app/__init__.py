@@ -30,6 +30,9 @@ def create_app( config_name ):
     from .admin import admin as admin_blueprint
     app.register_blueprint( admin_blueprint, url_prefix="/web/admin" )
 
+    from .doc import doc as doc_blueprint
+    app.register_blueprint( doc_blueprint, url_prefix="/web/documentation" )
+
     from .auth import auth as auth_blueprint
     app.register_blueprint( auth_blueprint, url_prefix="/auth" )
 
