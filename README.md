@@ -11,6 +11,6 @@ kimble es un sistema para administrar la fronteca de tu sitio web
 ## Instalación de componentes básicos
 > flask shell
 >
-> from app.models import Setup
-> setup = Setup()
-> setup.install()
+>   from app.models import Setup
+>   setup = Setup()
+>   setup.install()
