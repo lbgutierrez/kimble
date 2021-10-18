@@ -4,6 +4,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from app.auth.forms import LoginForm
 from app import db
 from app.auth.services import UserService
+from app.utils.context import Context
 
 @auth.before_app_request
 def before_request():
@@ -19,6 +20,11 @@ def before_request():
 def auth_login():
     form = LoginForm()
 
+    ctx = Context( "auth" )
+
+    if current_user.is_authenticated:
+        return redirect( url_for( "web.index" ) )
+
     if form.validate_on_submit():
         account = form.account.data.lower()
         password = form.password.data
@@ -27,7 +33,6 @@ def auth_login():
         user = service.find_user_account( account )
 
         if user is not None and user.verify_password( password ):
-            print("OK")
             login_user( user, form.remember_me.data )
             next = request.args.get( "next" )
 
@@ -38,7 +43,7 @@ def auth_login():
 
         flash( "Usuario o contraseña inválida" )
 
-    return render_template("auth/login.html", form=form)
+    return render_template("auth/login.html", form=form, ctx=ctx.generate())
 
 @auth.route( "/logout" )
 @login_required

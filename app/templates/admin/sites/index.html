@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col-12">
-        <h1>CATEGORIAS_</h1>
+        <h1>SITIOS_</h1>
     </div>
 </div>
 
@@ -24,26 +24,27 @@
                 </tr>
             </thead>
             <tbody>
-                {% if data.categorys %}
-                {% for cat in data.categorys %}
+                {% if data.sites %}
+                {% for site in data.sites %}
 
                     <tr class="d-flex">
-                        <td class="col-4">{{ cat.name }}</td>
-                        <td class="col-6">{{ cat.description }}</td>
+                        <td class="col-4">{{ site.name }}</td>
+                        <td class="col-6">{{ site.description }}</td>
                         <td class="col-2 action-btn">
                             <a href="{{ url_for( 'admin.subcategory', cat_alias=cat.alias ) }}">
-                                <i class="fas fa-outdent ml-2 mr-2"></i>
+                                <i class="fas fa-file-code ml-2 mr-2"></i>
                             </a>
-                            <a href="{{ url_for( 'admin.update_category', cat_alias=cat.alias ) }}">
-                                <i class="fas fa-edit ml-2 mr-2"></i>
-                            </a>
+                            <i class="fas fa-edit ml-2 mr-2"></i>
                             <i class="fas fa-trash-alt ml-2 mr-2"></i>
                         </td>
                     </tr>
                 {% endfor %}
                 {% else %}
                 <tr>
-                    <td colspan="3" class="text-center">No se encontraron categorias a mostrar</td>
+                    <td colspan="3" class="text-center">
+                        No se encontraron sitios, pulsa el boton "nuevo"<br>
+                        para comenzar, sino presiona <a href="{{ url_for('admin.new_subcategory', cat_alias=data.cat_alias) }}" class="blue">aquí</a>.
+                    </td>
                 </tr>
                 {% endif %}
             </tbody>

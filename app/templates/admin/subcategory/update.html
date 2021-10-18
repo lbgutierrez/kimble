@@ -1,11 +1,11 @@
 {% extends "admin/layout/_custom_base.html" %}
 {% block content %}
 
-<form id="new_category" action="{{ url_for( 'admin.new_category' ) }}" method="POST">
+<form id="update_category" action="{{ url_for( 'admin.update_subcategory', cat_alias=data.cat_alias, scat_alias=data.scat_alias ) }}" method="POST">
 
     <div class="row">
         <div class="col-12">
-            <h1>NUEVA CATEGORIA_</h1>
+            <h1>MODIFICAR SUBCATEGORIA_</h1>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
         <div class="col"></div>
         <div class="col-8">
 
-            {% include 'admin/layout/_category_form.html' %}
+            {% include 'admin/layout/_subcategory_form.html' %}
 
             <div class="d-lg-none d-xl-none d-xxl-none">
                 <div class="row mb-3">
@@ -33,7 +33,7 @@
                     <div class="col-6">
                     </div>
                     <div class="col-3">
-                        <input type="submit" value="CREAR" class="btn btn-tomato w-100">
+                        <input type="submit" value="MODIFICAR" class="btn btn-tomato w-100">
                     </div>
                 </div>
             </div>

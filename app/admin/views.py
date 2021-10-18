@@ -1,6 +1,6 @@
 from . import admin
 from app.admin.forms import CategoryForm, SubcategoryForm
-from app.admin.service import CategoryService, SubcategoryService
+from app.admin.service import CategoryService, SubcategoryService, SiteService
 from flask import flash, render_template, redirect, url_for
 from flask_login import login_required
 from app.utils.context import Context
@@ -52,8 +52,36 @@ def new_category():
 
     return render_template( "/admin/category/new.html", ctx=ctx.generate(), form=form)
 
-def modificar_categoria():
-    return "categorias"
+
+@admin.route( "/category/<cat_alias>/update", methods=["GET", "POST"] )
+@login_required
+def update_category( cat_alias ):
+    ctx = Context( "admin" )
+    ctx.setBackward( url_for( "admin.category" ) )
+
+    service = CategoryService()
+
+    form = CategoryForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        alias = form.alias.data
+        desc = form.description.data
+
+        service.update( cat_alias, name, alias, desc )
+
+        flash( "Categoría actualizada satisfactoriamente" )
+        return redirect( url_for( "admin.category" ) )
+    else:
+        category = service.find_by_alias( cat_alias )
+        form.name.data = category.name
+        form.alias.data = category.alias
+        form.description.data = category.description
+
+    data = {
+        "cat_alias": cat_alias
+    }
+
+    return render_template( "/admin/category/update.html", ctx=ctx.generate(), form=form, data=data)
 
 
 @admin.route( "/cat-defx/subcategory", methods=["GET"] )
@@ -78,6 +106,7 @@ def subcategory( cat_alias=None ):
     }
 
     return render_template( "/admin/subcategory/index.html", ctx=ctx.generate(), data=data )
+
 
 @admin.route( "/cat-<cat_alias>/subcategorys/new", methods=["GET", "POST"] )
 @login_required
@@ -104,3 +133,50 @@ def new_subcategory( cat_alias ):
 
     return render_template( "/admin/subcategory/new.html", ctx=ctx.generate(), form=form, data=data)
 
+
+@admin.route( "/cat-<cat_alias>/subcategory/<scat_alias>/update", methods=["GET", "POST"] )
+@login_required
+def update_subcategory( cat_alias, scat_alias ):
+    ctx = Context( "admin" )
+    ctx.setBackward( url_for( "admin.subcategory", cat_alias=cat_alias ) )
+
+    service = SubcategoryService()
+
+    form = SubcategoryForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        alias = form.alias.data
+        desc = form.description.data
+
+        service.update( scat_alias, name, alias, desc )
+
+        flash( "Subcategoría actualizada satisfactoriamente" )
+        return redirect( url_for( "admin.subcategory", cat_alias=cat_alias ) )
+    else:
+        subcategory = service.find_by_alias( scat_alias )
+        form.name.data = subcategory.name
+        form.alias.data = subcategory.alias
+        form.description.data = subcategory.description
+
+    data = {
+        "cat_alias": cat_alias,
+        "scat_alias": scat_alias
+    }
+    
+    return render_template( "/admin/subcategory/update.html", ctx=ctx.generate(), form=form, data=data)
+
+
+@admin.route( "/sites", methods=["GET"] )
+@login_required
+def sites():
+    ctx = Context( "admin" )
+    ctx.setBackward( url_for( "admin.index" ) )
+
+    siteservice = SiteService()
+    sites = siteservice.find_all()
+
+    data = {
+        "sites": sites
+    }
+
+    return render_template( "/admin/sites/index.html", ctx=ctx.generate(), data=data )

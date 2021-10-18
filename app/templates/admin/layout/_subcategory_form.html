@@ -1,0 +1,23 @@
+<div class="box mb-4">
+                
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {{ form.name.label }}
+        <div class="col-12">
+            {{ form.name( class="form-control" ) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.alias.label }}
+        <div class="col-12">
+            {{ form.alias( class="form-control" ) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}
+        <div class="col">
+            {{ form.description( class="form-control" ) }}
+        </div>
+    </div>
+
+</div>
