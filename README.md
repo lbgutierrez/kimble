@@ -9,6 +9,6 @@ flask db upgrade
 
 ## Instalación de componentes básicos
 flask shell
->> from app.models import Setup
->> setup = Setup()
->> setup.install()
+    >> from app.models import Setup
+    >> setup = Setup()
+    >> setup.install()
