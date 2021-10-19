@@ -46,16 +46,24 @@
             <tbody>
 
                 {% if data.subcategorys %}
-                {% for cat in data.subcategorys %}
+                {% for scat in data.subcategorys %}
 
                     <tr class="d-flex">
-                        <td class="col-4">{{ cat.name }}</td>
-                        <td class="col-6">{{ cat.description }}</td>
+                        <td class="col-4">{{ scat.name }}</td>
+                        <td class="col-6">{{ scat.description }}</td>
                         <td class="col-2 action-btn">
-                            <a href="{{ url_for( 'admin.update_subcategory', cat_alias=data.cat_alias, scat_alias=cat.alias ) }}">
+                            <a href="{{ url_for( 'admin.update_subcategory', cat_alias=data.cat_alias, scat_alias=scat.alias ) }}">
                                 <i class="fas fa-edit ml-2 mr-2"></i>
                             </a>
-                            <i class="fas fa-trash-alt ml-2 mr-2"></i>
+                            <a href="javascript:delsubcategory('{{scat.alias}}-delete', '{{scat.name}}');">
+                                <i class="fas fa-trash-alt ml-2 mr-2"></i>
+                            </a>
+                            <form id="{{scat.alias}}-delete" action="{{ url_for( 'admin.delete_subcategory', cat_alias=data.cat_alias ) }}" method="post">
+                                {{ form.csrf_token }}
+                                <input type="hidden" name="name" value="{{ scat.name }}">
+                                <input type="hidden" name="alias" value="{{ scat.alias }}">
+                                <input type="hidden" name="description" value="{{ scat.description }}">
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
@@ -83,7 +91,8 @@
     <div class="col-9">
     </div>
 </div>
+{% endblock %}
 
-
-
+{% block js_custom %}
+<script src="{{ url_for('static', filename='js/spec/admin.js' ) }}"></script>
 {% endblock %}

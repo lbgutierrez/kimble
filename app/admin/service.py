@@ -18,6 +18,20 @@ class CategoryService():
         category.description = description
         db.session.commit()
 
+    def delete( self, name, alias, description ):
+        category = Category.query.filter_by( name=name )\
+            .filter_by( alias=alias )\
+                .filter_by( description=description )\
+                    .one_or_none()
+        db.session.delete( category )
+        db.session.commit()
+        
+        if category != None:
+            return True
+        
+        return False
+
+
     def find_all( self ):
         return Category.query.all()
 
@@ -44,11 +58,24 @@ class SubcategoryService():
         db.session.commit()
 
     def update( self, cat_alias, name, alias, description ):
-        category = self.find_by_alias( cat_alias )
-        category.name = name
-        category.alias = alias
-        category.description = description
+        subcategory = self.find_by_alias( cat_alias )
+        subcategory.name = name
+        subcategory.alias = alias
+        subcategory.description = description
         db.session.commit()
+
+    def delete( self, name, alias, description ):
+        subcategory = Subcategory.query.filter_by( name=name )\
+            .filter_by( alias=alias )\
+                .filter_by( description=description )\
+                    .one_or_none()
+        db.session.delete( subcategory )
+        db.session.commit()
+        
+        if subcategory != None:
+            return True
+        
+        return False
 
     def find_by_category( self, cat_name ):
         cat_service = CategoryService()
